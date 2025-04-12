@@ -5,36 +5,30 @@ This ***does NOT aim*** at being the perfect installation!
 
 It ***does aim*** at being 
 
-::: warn
-We assume that that you know when to change defaults user, passwords and domains as we go.
-
-:::
+> [!WARNING]
+> We assume that that you know when to change defaults user, passwords and domains as we go.
 
 ### Base Debian install
 
 I will be using [Debian12 Netinstall](https://www.debian.org/CD/netinst/)  for the base server installation.
 
-::: warn
-**If installing in a VM**  
-Make sure to have unrestricted access to your network  to circumvent DNS resolution problems.
-
-:::
+> [!WARNING]
+> **If installing in a VM**  
+> Make sure to have unrestricted access to your network  to circumvent DNS resolution problems.
 
 - boot machine with img/iso
 - chose the installer mode you like
 - Partition with /var & /home  on separate partitions
 
-  ::: info
-  Or use separate disk(s) for both 
+> [!NOTE]
+> Or use separate disk(s) for both 
 
-  :::
 - ⚠️ give a strong **root** passwd and keep it safe!
 
-  ::: info
-  We will be the only admin of the server.  
-  ***-Almost-*** no need for sudo
+> [!NOTE]
+>  We will be the only admin of the server.  
+>  ***-Almost-*** no need for sudo
 
-  :::
 - ⚠️ user : nxtadmin, chose a passwd and write it down
 - 🚫  NO GUI installation
 - ssh install
@@ -63,10 +57,8 @@ nano /home/nxtadmin/.ssh/authorized_keys
 Logout and test  your config.  
 You should be able to ssh into your server w/o being asked your passwd.
 
-::: error
-For all the rest of this guide, we will be acting as **root**.
-
-:::
+> [!CAUTION]
+> For all the rest of this guide, we will be acting as **root**.
 
 ```
 su -l root
@@ -118,12 +110,10 @@ apt install certbot python3-certbot-apache
 apt install sudo
 ```
 
-::: warn
-**sudo** will only be installed to interact with the [Nextcloud  occ command ](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html)
-
-__No other user will be allowed to use sudo, eg not in sudoer's__
-
-:::
+> [!WARNING]
+> **sudo** will only be installed to interact with the [Nextcloud  occ command ](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html)
+> 
+> __No other user will be allowed to use sudo, eg not in sudoer's__
 
 ### Apache2 Set Up
 
@@ -314,12 +304,10 @@ Paste these settings
  logpath = /var/www/nextcloud/data/nextcloud.log
 ```
 
-::: info
-bantime, findtime and maxretry can be tuned to further reduce the background noise on your server.  
-With these settings, an IP will be banned for 24hrs (86400 s) if it hits 3 fails during the findtime of 12 hrs  
-There's also the options to use [incremental bans](https://stackoverflow.com/questions/66392687/fail2ban-how-to-ban-ip-permanently-after-it-was-baned-3-times-temporarily).
-
-:::
+> [!NOTE]
+> bantime, findtime and maxretry can be tuned to further reduce the background noise on your server.  
+> With these settings, an IP will be banned for 24hrs (86400 s) if it hits 3 fails during the findtime of 12 hrs  
+> There's also the options to use [incremental bans](https://stackoverflow.com/questions/66392687/fail2ban-how-to-ban-ip-permanently-after-it-was-baned-3-times-temporarily).
 
 Restart fail2ban
 
@@ -329,10 +317,8 @@ systemctl restart fail2ban
 
 ### Set Up alias in bash
 
-::: info
-Create an alias for the Nextcloud occ command, preferably in your .bash_aliases
-
-:::
+> [!NOTE]
+> Create an alias for the Nextcloud occ command, preferably in your .bash_aliases
 
 ```
 alias occ='sudo -u  www-data php /var/www/nextcloud/occ'
@@ -443,10 +429,8 @@ You can do that if you need it.
 
 If mail sending does not work because of CA issues, add this into your config.php
 
-::: warn
-Be aware of the security risks
-
-:::
+> [!WARNING]
+> Be aware of the security risks
 
 ```
 'mail_smtpstreamoptions' => array (
@@ -463,7 +447,7 @@ Be aware of the security risks
 
 You might to run some database repairs manually.   
 Two of the most common tasks below.  
-❗ Note the use of the [alias](https://outside.rimshot.lu/index.php/apps/notes/note/3288#h-set-up-alias-in-bash) we set before.
+❗ Note the use of the [alias](https://github.com/p3titpoe/p3titpoe/edit/main/nextcloud_from_scratch.md#set-up-alias-in-bash) we set before.
 
 ```
 #repair indices:
