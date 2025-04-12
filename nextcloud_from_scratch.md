@@ -447,7 +447,7 @@ If mail sending does not work because of CA issues, add this into your config.ph
 
 You might to run some database repairs manually.   
 Two of the most common tasks below.  
-❗ Note the use of the [alias](https://github.com/p3titpoe/p3titpoe/edit/main/nextcloud_from_scratch.md#set-up-alias-in-bash) we set before.
+❗ Note the use of the [alias](#set-up-alias-in-bash) we set before.
 
 ```
 #repair indices:
